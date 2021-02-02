@@ -1,2 +1,10 @@
 # laughing-meme
-docker, ansible, nginx, nodejs, koa, postgesql
+
+
+## proxy-server:
+  nginx
+## app
+  nodejs
+  koa
+## database
+  postgresql
