@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  web-server:
+    build:
+      context: ../..
+      dockerfile: ./setup/development/Dockerfile.web-server
+    container_name: laughing-meme
+    volumes:
+      - ../../src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/setup/development/nodemon.json
+      - ../../tsconfig.json:/home/node/app/tsconfig.json
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    command: npx nodemon --config ./setup/development/nodemon.json
