@@ -1,0 +1,25 @@
+{
+  "name": "laughing-meme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "nodemon --config ./setup/nodemon.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skaltus/laughing-meme.git"
+  },
+  "author": "skaltus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skaltus/laughing-meme/issues"
+  },
+  "homepage": "https://github.com/skaltus/laughing-meme#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
