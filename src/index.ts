@@ -8,4 +8,4 @@ app.use((ctx) => {
   ctx.body = 'Hello World';
 });
 
-app.listen(PORT, () => console.log(`The app is launched in ${app.env} mode on port ${PORT}`));
+app.listen(PORT, () => console.log(`launched in ${app.env} mode on port ${PORT}`));

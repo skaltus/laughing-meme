@@ -2,16 +2,35 @@ version: "3.7"
 
 services:
   web-server:
-    build:
-      context: ../..
-      dockerfile: ./setup/development/Dockerfile.web-server
-    container_name: laughing-meme
+    image: node:lts-alpine
+    container_name: web-server
+    user: node
+    working_dir: /home/node/app
+    depends_on: 
+      - database
     volumes:
-      - ../../src:/home/node/app/src
-      - ./nodemon.json:/home/node/app/setup/development/nodemon.json
-      - ../../tsconfig.json:/home/node/app/tsconfig.json
+      - ../..:/home/node/app
     expose:
       - "3000"
     ports:
       - "3000:3000"
     command: npx nodemon --config ./setup/development/nodemon.json
+
+  database:
+    image: postgres:alpine
+    restart: always
+    container_name: database
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: appdb
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer
+    environment:
+      ADMINER_DEFAULT_SERVER: database
+      ADMINER_DESIGN: galkaev
+    ports:
+      - 8080:8080
