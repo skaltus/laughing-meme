@@ -1,10 +1,9 @@
-# laughing-meme
+## СТРУКТУРА ПРОЕКТА
 
+- setup - скрипты для запуска приложения в режиме разработки/тестирования/продакшена
+- src - исходный код
 
-## proxy-server:
-  nginx
-## app
-  nodejs
-  koa
-## database
-  postgresql
+## ЗАПУСК ПРОЕКТА В РЕЖИМЕ РАЗРАБОТКИ
+
+1. установить docker, lts версию nodejs и npm 
+2. npm run dev

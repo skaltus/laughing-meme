@@ -1,36 +1,50 @@
 version: "3.7"
 
 services:
+  proxy-server:
+    image: nginx:alpine
+    container_name: proxy-server
+    restart: always
+    volumes:
+      - ./templates:/etc/nginx/templates
+    ports:
+      - "4000:80"
+
   web-server:
     image: node:lts-alpine
     container_name: web-server
     user: node
     working_dir: /home/node/app
-    depends_on: 
+    depends_on:
+      - proxy-server
       - database
+      - database-manager
     volumes:
       - ../..:/home/node/app
+    environment:
+      NODE_ENV: development
+      DATABASE_CONNECTION_STRING: postgres://user:password@database:5432/appdb
+      PORT: 3000
     expose:
       - "3000"
-    ports:
-      - "3000:3000"
     command: npx nodemon --config ./setup/development/nodemon.json
 
   database:
     image: postgres:alpine
     restart: always
     container_name: database
+    volumes:
+      - ./database:/var/lib/postgresql/data/pgdata
     environment:
-      POSTGRES_USER: dbuser
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: appdb
 
-  adminer:
+  database-manager:
     image: adminer
     restart: always
-    container_name: adminer
+    container_name: database-manager
     environment:
       ADMINER_DEFAULT_SERVER: database
       ADMINER_DESIGN: galkaev
-    ports:
-      - 8080:8080

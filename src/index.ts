@@ -1,11 +1,3 @@
-import Koa from 'koa';
-import config from './common/config';
+import start from './loaders/server.start';
 
-const app = new Koa();
-const { PORT } = config;
-
-app.use((ctx) => {
-  ctx.body = 'Hello World';
-});
-
-app.listen(PORT, () => console.log(`launched in ${app.env} mode on port ${PORT}`));
+start();
